@@ -1,0 +1,136 @@
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style >
+.sty{
+  background-color: #eee;
+    width: 600px;
+    height: 300px;
+    border: 5px solid green;
+    padding-left: 100px;
+    padding-right:  80px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 250px;
+    margin-top: 100px;
+}
+
+</style>
+
+</head>
+<body>
+<div class="container">
+  <div class="sty">
+    <center><h1>Welcome to my Website!</h1><br>
+    <p>To proceed further,please Signin</p>
+    <p>If you are new user,signup for a new account</p></center><br><br><br>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signin" style="float:left;">SignIn</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signup" style="float:right;">SignUp</button>
+  </div>
+
+<!-- Modal signup -->
+<div id="signup" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">SignUp</h2>
+      </div>
+      <div class="modal-body">
+        <form data-toggle="validator" class="form-horizontal" role="form" >
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Username:</label>
+      <div class="col-sm-5">
+        <input  type="text" class="form-control" required >
+      </div>
+    </div><br>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Password:</label>
+      <div class="col-sm-5">          
+        <input type="password" class="form-control" required >
+      </div>
+    </div>
+
+  </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--//modal signup -->
+<!--modal signin -->
+<div id="signin" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">SignIn</h2>
+      </div>
+      <div class="modal-body">
+        <form data-toggle="validator" class="form-horizontal" role="form" >
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Username:</label>
+      <div class="col-sm-5">
+        <input  type="text" class="form-control" required >
+      </div>
+    </div><br>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Password:</label>
+      <div class="col-sm-5">          
+        <input type="password" class="form-control" required >
+      </div>
+    </div>
+
+  </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--//modal signin -->
+</div>
+<!--//container-->
+
+<?php
+$firstname = $_POST['firstname'];
+$email = $_POST['email'];
+$lastname = $_POST['lastname'];
+
+
+$host="localhost";
+$user="root";
+$password="";
+$dbname="mydb";
+$conn =  mysqli_connect($host,$user, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+$sql = "INSERT INTO MyGuests (firstname, lastname, email)
+VALUES ($firstname,$lastname,$email)";
+
+if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+
+?>
+</body>
+</html>
+
